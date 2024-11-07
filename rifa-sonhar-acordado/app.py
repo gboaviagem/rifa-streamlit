@@ -9,10 +9,18 @@ st.set_page_config(
 # Initialize connection.
 db = MongoHandler()
 
-st.title("Rifa do Sonhar Acordado!")
+st.title("🎄✝️ Rifa do Sonhar Acordado!")
 
-st.markdown(
-    """Olá! Obrigado por querer contribuir com a Rifa Solidária do SA! Fica ligado nos prêmios:
+st.markdown("""Em dezembro faremos mais uma Grande Festa de Natal para as instituições que atendemos durante o ano pelo Sonhar Acordado! Estamos vendendo essa rifa pra ajudar nos custos do evento. Topam participar?
+
+- Escolhe a quantidade 
+- Me diz o número que queres (entre 1 e 500)
+- Me envia o comprovante do Pix
+- Fica na torcida para ganhar!
+
+Em breve, abriremos as inscrições para quem quiser ser voluntário na Festa. Caso queira participar, será super bem-vindo(a)! ❤️
+
+Ah, e fica ligado nos prêmios da rifa:
     
     - 1° PRÊMIO: R$ 100 Reais
     - 2° PRÊMIO: Um rodízio no restaurante 'Entre Amigos - O Bode'
