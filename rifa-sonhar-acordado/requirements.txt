@@ -1,0 +1,4 @@
+pandas==2.2.3
+streamlit==1.40
+dnspython==2.7.0
+pymongo==4.10.1
