@@ -3,16 +3,21 @@ from utils.db import MongoHandler
 
 st.set_page_config(
     page_title="Rifa do Sonhar Acordado",
-    page_icon="👶", layout="centered",
+    layout="centered",
     initial_sidebar_state="auto", menu_items=None)
 
 # Initialize connection.
 db = MongoHandler()
 
-st.title("👶 Rifa do Sonhar Acordado!")
+st.title("Rifa do Sonhar Acordado!")
 
 st.markdown(
-    "Olá! Obrigado por querer contribuir com a Rifa Solidária do SA! Fica ligado nos prêmios:\t- 1° PRÊMIO: R$ 100 Reais\t- 2° PRÊMIO: Um rodízio no restaurante 'Entre Amigos - O Bode'\t- 3° PRÊMIO: Um Kit de Cosméticos\t- 4° PRÊMIO: Uma Air Fryer.")
+    """Olá! Obrigado por querer contribuir com a Rifa Solidária do SA! Fica ligado nos prêmios:
+    
+    - 1° PRÊMIO: R$ 100 Reais
+    - 2° PRÊMIO: Um rodízio no restaurante 'Entre Amigos - O Bode'
+    - 3° PRÊMIO: Um Kit de Cosméticos
+    - 4° PRÊMIO: Uma Air Fryer.""")
 
 name = st.text_input(
     "São só 2 passos! Primeiro, por favor digite seu nome, para "
@@ -51,10 +56,10 @@ if len(name) > 0:
             db.write_new_number(name, int(option))
             st.markdown(
                 "**Muito obrigado!** Para concluir a "
-                "reserva da rifa, você pode **transferir os R$5 para "
+                "reserva da rifa, você precisa **transferir os R$5 para "
                 "o seguinte PIX**:")
 
-            st.subheader("hamiltonmmf@hotmail.com")
+            st.subheader("Pix: hamiltonmmf@hotmail.com")
 
             st.markdown(
                 "Fique ligado no Sorteio: 04/12/2024 às 20h. "
