@@ -11,23 +11,26 @@ db = MongoHandler(set_project_name=project)
 st.title("Displaying the current numbers in the database.")
 
 with st.spinner('Reading from the database...'):
-    df = db.fetch_numbers()
+    df = db.fetch_items()
 
-st.dataframe(df)
+if len(df) == 0:
+    st.info("No items in the database.")
+else:
+    st.dataframe(df)
 
-@st.dialog("Erasing...")
-def erase_db():
-    items = db.read_items()
-    with st.spinner("Erasing all items..."):
-        for item in items:
-            db.delete_item(name=item[MongoHandler.NAME_COL])
+    @st.dialog("Erasing...")
+    def erase_db():
+        items = db.read_items()
+        with st.spinner("Erasing all items..."):
+            for item in items:
+                db.delete_item(name=item[MongoHandler.NAME_COL])
 
-def write_db():
-    filename = "rifa_project_data.csv"
-    df.to_csv(filename, index=False)
-    st.success(f"CSV written to file {filename}!")
+    def write_db():
+        filename = "rifa_project_data.csv"
+        df.to_csv(filename, index=False)
+        st.success(f"CSV written to file {filename}!")
 
-st.text("What do you wish to do?")
+    st.text("What do you wish to do?")
 
-st.button("Erase database", on_click=erase_db)
-st.button("Write database to CSV", on_click=write_db)
+    st.button("Erase database", on_click=erase_db)
+    st.button("Write database to CSV", on_click=write_db)

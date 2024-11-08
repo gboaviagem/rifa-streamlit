@@ -43,8 +43,10 @@ class MongoHandler:
     def fetch_items(self) -> pd.DataFrame:
         """Fetch all documents for the given project as a DataFrame."""
         items = self.read_items()
-        df = pd.DataFrame(items).drop(
-            columns=["_id", MongoHandler.PROJECT_COL])
+        df = pd.DataFrame(items)
+        if len(df) > 0:
+            df = df.drop(
+                columns=["_id", MongoHandler.PROJECT_COL])
         return df
 
     def read_items(self, from_name: str = None):
