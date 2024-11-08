@@ -6,6 +6,7 @@ sys.path.append(str(Path(__file__).resolve().parents[2]))
 from utils.db import MongoHandler
 
 TOTAL_NUMBERS = 500
+PHONE_NUMBER_COL = "PHONE_NUMBER"
 PROJECT = "rifa-sonhar-acordado"
 
 def is_valid_phone_number(phone: str):
@@ -55,8 +56,18 @@ Ah, e fica ligado nos prêmios da rifa:
 name = st.text_input(
     "Só precisamos de 2 dados! Primeiro, por favor digite seu nome completo, para "
     "que possamos te identificar:")
+if len(name) == 0:
+    st.stop()
+
+default_value = ""
+with st.spinner("Checando se já temos seu número..."):
+    items = db.read_items(from_name=name)
+    if len(items) > 0 and items[0].get(PHONE_NUMBER_COL):
+        default_value = items[0].get(PHONE_NUMBER_COL)
+
 phone = st.text_input(
-    "Por fim, seu telefone com DDD (exemplo: `81 91234-1234`):")
+    "Por fim, seu telefone com DDD (exemplo: `81 91234-1234`):",
+    value=default_value)
 
 if len(phone) > 0 and not is_valid_phone_number(phone):
     st.error("Número de telefone inválido. Por favor, escreva nesse formato de exemplo: 81 91234-1234, com o espaço e hífen.")
@@ -94,7 +105,7 @@ elif len(name) > 0 and len(phone) > 0:
             db.write_new_item(
                 name=name,
                 num=int(option),
-                kwargs={"phone_number": phone}
+                kwargs={PHONE_NUMBER_COL: phone}
             )
             st.markdown(
                 "**Muito obrigado!** Para concluir a "

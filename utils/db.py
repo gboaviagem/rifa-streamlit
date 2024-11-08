@@ -47,9 +47,12 @@ class MongoHandler:
             columns=["_id", MongoHandler.PROJECT_COL])
         return df
 
-    def read_items(self):
+    def read_items(self, from_name: str = None):
+        kwargs = {}
+        if from_name:
+            kwargs = {MongoHandler.NAME_COL: from_name}
         items = self.db.my_collection.find(
-            filter={MongoHandler.PROJECT_COL: self.project})
+            filter={MongoHandler.PROJECT_COL: self.project, **kwargs})
         items = list(items)  # make hashable for st.cache
         return items
 
