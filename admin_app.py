@@ -17,6 +17,7 @@ if len(df) == 0:
     st.info("No items in the database.")
 else:
     st.dataframe(df)
+    st.info(f"There are {len(df)} items in the database.")
 
     @st.dialog("Erasing...")
     def erase_db():
